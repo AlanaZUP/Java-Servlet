@@ -76,3 +76,42 @@ public class NovaEmpresaServlet extends HttpServlet {
 ```
 
 - Feito isso vc já terá acesso ao valor do parâmetro.
+
+<br>
+
+### Metodos GET e POST
+
+No tópico anterior aprendemos a ler um parâmetro, mais uma questão importante é que esse parâmetro está visível na URL `localhost:8080/gerenciador/novaEmpresa?nome=Teste`. E se tivermos muitos parâmetros, ou precisarmos enviarmos um texto? E em relação a segurança dos dados? Será que essa é a melhor forma? Bom.... iremos ver agora uma outra forma de enviar parâmetros que possa resolver essas nossas questões.
+
+Se olharmos nas ferramentas do desenvolvedor do seu navegador, você irá reparar que a URL utiliza o método GET, ou seja, o método "receber" do inglês. A idéia do GET é exatamente essa, enviar e receber resultados, como uma pesquisa. 
+
+Agora para realizarmos o que a gente precisa, a ação de cadastrar uma nova empresa, nós precisaremos de um novo método, o método POST. A função dele é enviar informações para serem inseridos no nosso servidor.
+
+Agora iremos realizar essa requisição com o POST:
+- No seu projeto, precisaremos criar um formulário dentro da pasta que possui as pastas `META-INF` e `WEB-INF`. Esse será o script do nosso formulário:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Insert title here</title>
+    </head>
+    <body>
+
+        <form action="/gerenciador/novaEmpresa" method="post">
+
+            Nome: <input type="text" name="nome" />
+
+            <input type="submit" />
+        </form>
+
+    </body>
+</html>
+```
+
+- Utilizamos a tag `<form>` para criar um formulário. o atributo `action` serve para inidicar qual a URL de destino e o `method` indica qual o método da requisição.
+- Em seguida temos a tag `<input>` que permite escrever um dado. Os atributos `type` indica qual o tipo de dado e `name` qual o nome do parâmetro. O ultimo `input` será para executarmos a ação de enviar os dados.
+
+
+Prontinho, agora sua aplicação já faz uma requisição com o POST como forma de cadastramento.
