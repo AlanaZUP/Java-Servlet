@@ -86,3 +86,57 @@ public class NovaEmpresaServlet extends HttpServlet {
 	</body>
 </html>
 ```
+
+### JSP para listar empresas
+
+Nós vimos como fazer de modo dinâmico o retorno ao cadastrar uma empresa, agora veremos como deixar dinâmico o retorno de uma lista de empresas.
+
+Para isso, iremos modificar nosso Servlet que retorna a lista de modo que ele despache a requisição para o nosso JSP.
+- No seu Servlet retire todos os comandos que criam o HTML. Usando o `RequestDispatcher` nós iremos para o JSP que fará o retorno visual com o HTML. Para enviar os dados das empresas, nós iremos criar um atributo no request.
+
+```java
+@WebServlet("/listaEmpresas")
+public class ListaEmpresasServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Banco banco = new Banco();
+		
+		request.setAttribute("empresas", banco.getEmpresas());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("listarEmpresas.jsp");
+		rd.forward(request, response);
+	
+	}
+
+}
+```
+
+- Agora só precisamos criar nosso JSP de modo que ele receba essa lista de empresas e que consiga apresentá-las dinamicamente.
+
+```jsp
+<%@page import="br.com.curso.servlet.Empresa"%>
+<%@page import="java.util.List"%>
+
+<html>
+	<body>
+		<ul>
+			<%
+				List<Empresa> empresas = (List<Empresa>)request.getAttribute("empresas");
+				for(Empresa empresa : empresas){
+					out.println("<li>" + empresa.getNome() + "</li>");
+				}
+			%>
+			
+			<%
+				for(Empresa empresa : empresas){
+			%>
+					<li> <%= empresa.getNome() %> </li>
+			<%
+				}
+			%>
+		</ul>
+	</body>
+</html>
+```
