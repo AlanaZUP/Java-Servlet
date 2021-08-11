@@ -9,3 +9,4 @@ Tópicos abordados nessa aula:
 - [Definindo o nosso modelo](https://github.com/AlanaZUP/Java-Servlet/tree/master/Definindo%20o%20nosso%20modelo)
 - [Páginas dinâmicas com JSP](https://github.com/AlanaZUP/Java-Servlet/tree/master/Paginas%20dinamicas%20com%20JSP)
 - [JSTL e ExpressionLanguage](https://github.com/AlanaZUP/Java-Servlet/tree/master/JSTL%20e%20Expression%20Language)
+- [Redirecionando o Fluxo]()
