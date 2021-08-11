@@ -107,3 +107,46 @@ public class ListaEmpresasServlet extends HttpServlet {
 
 Agora ele já retorna com a lista das empresas cadastradas. Mas repare que ao fazer o reload da página, ele irá registrar o dado novamente, o que é uma prática ruim para o nosso sistema.
 
+### Redirecionamento pelo navegador
+
+Ao usarmos o dispatch, ele rediorecina tudo na mesma requisição, e essa não é uma boa prática, como visto no tópico aterior. Então em vez de fazer essa requisição no Servlet, devemos fazer através do navegador, pelo Client-Side. Iremos então devolver uma resposta ao navegador indicando que ele deve redirecionar para a outra página que lista as empresas.
+
+```java
+@WebServlet("/novaEmpresa")
+public class NovaEmpresaServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String nome = request.getParameter("nome");
+		String date= request.getParameter("dataAbertura");
+		Date dateAbertura = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			dateAbertura = sdf.parse(date);
+		} catch (ParseException e) {
+			throw new ServletException(e);
+		}
+		
+		System.out.println("Cadastrando nome: " + nome);
+		
+		Empresa empresa = new Empresa();
+		empresa.setNome(nome);
+		empresa.setDataAbertura(dateAbertura);
+		
+		Banco banco = new Banco();
+		banco.adiciona(empresa);
+		
+		request.setAttribute("empresa", empresa.getNome());
+		
+		response.sendRedirect("listaEmpresas");
+		
+//		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
+//	
+//		rd.forward(request, response);
+	}
+
+}
+```
+

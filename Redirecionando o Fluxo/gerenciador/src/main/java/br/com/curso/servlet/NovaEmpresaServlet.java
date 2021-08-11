@@ -41,9 +41,11 @@ public class NovaEmpresaServlet extends HttpServlet {
 		
 		request.setAttribute("empresa", empresa.getNome());
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
-	
-		rd.forward(request, response);
+		response.sendRedirect("listaEmpresas");
+		
+//		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
+//	
+//		rd.forward(request, response);
 	}
 
 }
