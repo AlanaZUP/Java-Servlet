@@ -115,3 +115,26 @@ Agora iremos realizar essa requisição com o POST:
 
 
 Prontinho, agora sua aplicação já faz uma requisição com o POST como forma de cadastramento.
+
+### Apenas Post
+
+É possível indicarmos ao nosso Servlet qual será o método que ele receberá. Para isso, em vez de sobreescrevermos o método `service`, nós devemos sobreescrever o método `doPost` para quando quisermos receber requisições do tipo POST, ou então o método `doGet` para recebermos requisição do tipo GET.
+
+```java
+@WebServlet("/novaEmpresa")
+public class NovaEmpresaServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        System.out.println("Cadastrando nova empresa");
+
+        String nomeEmpresa = request.getParameter("nome");
+
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>Empresa " + nomeEmpresa + " cadastrada com sucesso!</body></html>");
+    }
+
+}
+```

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class NovaEmpresa extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nome = request.getParameter("nome");
 		System.out.println("Cadastrando nome: " + nome);
 		
