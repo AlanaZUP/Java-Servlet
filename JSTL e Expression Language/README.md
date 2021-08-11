@@ -88,3 +88,52 @@ Analisando da mesma forma o arquivo `novaEmpresaCadastrada.jsp`, veremos que qua
 	</body>
 </html>
 ```
+
+### Usando a taglib fmt
+
+Nesta aula estudaremos a sub-biblioteca `fmt` do JSTL, que lida especificamente com formatação. Iremos implementar uma nova funcionalidade ao cadastrarmos uma empresa, a data de abertura dessa empresa. Para isso, usaremos o fmt.
+
+- Começaremos trabalhando em `listaEmpresas.jsp`. Junto com o nome, iremos incluir também a data.
+```jsp
+<body>
+    Lista de empresas: <br />
+
+    <ul>
+        <c:forEach items="${empresas}" var="empresa">
+            <li>${empresa.nome } ${empresa.dataAbertura }</li>
+        </c: forEach>
+    </ul>
+</body>
+```
+
+- Na classe Empresa, iremos representar a data de abertura. Usaremos o Date criando o atributo dataAbertura. Para podermos fazer um teste rápido, iremos inicializar diretamente a Date.
+```java
+package br.com.alura.gerenciador.servlet;
+
+import java.util.Date;
+
+public class Empresa { 
+
+    private Integer id;
+    private String nome;
+    private Date dataAbertura = new Date();
+```
+
+- Ao fazer a requisição, você verá a lista de empresas e a data de abertura na formatação padrão. Para poder formatar, usaremos a fmt.
+
+```jsp
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<html>
+	<body>
+		Listar Empresas: </br>
+		<ul>
+			<c:forEach items="${empresas }" var="empresa">
+				<li>${empresa.nome} <fmt:formatDate value="${empresa.dataAbertura }" pattern="dd/MM/yyyy"/> </li>
+			</c:forEach>		
+		</ul>
+	</body>
+</html>
+```
+

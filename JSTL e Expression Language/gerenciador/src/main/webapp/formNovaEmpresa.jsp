@@ -9,7 +9,7 @@
 	<body>
 		<form action="${linkServlet }" method="post">
 			Nome: <input type="text" name="nome" />
-			
+			Data Abertura: <input type="text" name="dataAbertura">
 			<input type="submit" />
 		</form>
 	</body>
