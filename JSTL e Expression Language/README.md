@@ -39,3 +39,52 @@ Para que nós possamo fazer laços de repetição no JSP, nós precisaremos de u
 ```
 
 Prontinho, agora você já tem uma página HTML dinâmica utilizando o JSP e o JSTL.
+
+### Usando a taglib core
+
+Falamos sobre o core, que realiza o controle de fluxo, mas na verdade a biblioteca possui mais tags com outros focos. Um exemplo é o `fmt`, que serve para a formatação de datas, números e i18n, isto é internacionalização. Teremos, ainda, mais duas sub-bibliotecas: `sql` e `xml`
+Além das funções que nós vimos no tópico anterior, é possível fazer outras ações com o cor do JSTL.
+
+Para utilizarmos o **core** e o **fmt** sempre teremos de ter as seguintes declarações no início da página:
+
+core - controle de fluxo `<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>`
+
+fmt - formatação/i18n (internacionalização) `<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt"%>`
+
+Agora vamos analisar o código do nosso arquivo em `formNovaEmpresa.jsp`. Escrever o nome do contexto no arquivo JSP não é uma boa prática, uma vez que ele pode variar e gerar problemas em outras páginas. Para lidarmos com esse fluxo dinâmico, usaremos a biblioteca Taglib, mais especificamente, a tag `<c:url />`. Nela, inseriremos o atributo value, e, em seguida, iremos inserir um único caminho possível para chegar até o Servlet.
+
+```jsp
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:url value="/novaEmpresa" var="linkServlet" />
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Nova Empresa</title>
+	</head>
+	<body>
+		<form action="${linkServlet }" method="post">
+			Nome: <input type="text" name="nome" />
+			
+			<input type="submit" />
+		</form>
+	</body>
+</html>
+```
+
+Analisando da mesma forma o arquivo `novaEmpresaCadastrada.jsp`, veremos que quando acessamos essa página sem enviar uma empresa, ela aparece coma seguinte mensagem `Empresa cadastrada com sucesso!`. Reapre que não há nada, portanto ela devia está com uma mensagem apropriada para a situação. Para fazer isso, iremos escrever a tag `<c:if>`, e inseriremos em seu corpo a condição.Precisaremos definir a condição por meio do atributo `test`.
+
+```jsp
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+	<body>
+		<c:if test="${not empty empresa }">
+			Empresa ${ empresa } foi cadastrada com sucesso no DB!
+		</c:if>
+		
+		<c:if test="${empty empresa }">
+			Nenhuma empresa foi cadastrada.
+		</c:if>
+	</body>
+</html>
+```
