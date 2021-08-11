@@ -1,6 +1,6 @@
 # Páginas Dinâmicas com JSP
 
-# Primeiro JSP
+### Primeiro JSP
 
 Vimos nas aulas anteiores o processo de retornar um dado no formato HTML através do Servlet. Imagine agora enviar vários formatações de HTML por esse recurso, você acha que é uma opção viável?
 
