@@ -3,6 +3,7 @@ package br.com.curso.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,12 +25,11 @@ public class NovaEmpresaServlet extends HttpServlet {
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
 		
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<body>");
-		out.println("A Empresa " + nome + " foi cadastrada!");
-		out.println("</body>");
-		out.println("</html>");
+		request.setAttribute("empresa", empresa.getNome());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCadastrada.jsp");
+	
+		rd.forward(request, response);
 	}
 
 }

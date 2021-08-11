@@ -38,3 +38,51 @@ Vamos criar então nosso primeiro JSP:
 	</body>
 </html>
 ```
+
+### Despachando Requisição
+
+No tópico anterior nós aprendemos a utilizar o JSP para fazer nossas páginas HTML de modo dinâmico.
+
+Agora, nós iremos mudar nosso Servlet para que ao invés de produzir e retornar o HTML direto, ele envie essa função para o nosso JSP. Para que isso acontecer, nós precisaremos despachar a requisição para o arquivo com o HTML.
+- No Servlet que cadastra uma nova empresa, você deve retirar todo retorno com HTML, nós iremos colocar o `RequestDispatcher` para fazer essa transição pro nosso arquivo JSP. Além disso, também precisamos enviar o dado que indique que a empresa foi cadastrada, iremos adicionar no nosso request um attributo que relacione com o nome cadastrado.
+
+```java
+@WebServlet("/novaEmpresa")
+public class NovaEmpresaServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nome = request.getParameter("nome");
+		System.out.println("Cadastrando nome: " + nome);
+		
+		Empresa empresa = new Empresa();
+		empresa.setNome(nome);
+		
+		Banco banco = new Banco();
+		banco.adiciona(empresa);
+		
+		request.setAttribute("empresa", empresa.getNome());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCadastrada.jsp");
+	
+		rd.forward(request, response);
+	}
+
+}
+```
+
+- Agora só precisamos editar nosso JSP para identificar o atributo da requisição.
+
+```jsp
+<%
+	String nomeEmpresa = (String)request.getAttribute("empresa");
+	System.out.println(nomeEmpresa);
+%>
+
+<html>
+	<body>
+	Empresa <% out.println(nomeEmpresa); %> foi cadastrada com sucesso no DB!
+	</body>
+</html>
+```
