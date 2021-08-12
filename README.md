@@ -12,3 +12,4 @@ Tópicos abordados nessa aula:
 - [Redirecionando o Fluxo](https://github.com/AlanaZUP/Java-Servlet/tree/master/Redirecionando%20o%20Fluxo)
 - [Completando o CRUD](https://github.com/AlanaZUP/Java-Servlet/tree/master/Completando%20o%20CRUD)
 - [Deploy da aplicação](https://github.com/AlanaZUP/Java-Servlet/tree/master/Deploy%20da%20aplica%C3%A7%C3%A3o)
+- [Exercício proposto](https://github.com/AlanaZUP/Java-Servlet/tree/master/Exerc%C3%ADcio%20proposto)
