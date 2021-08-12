@@ -11,4 +11,4 @@ Tópicos abordados nessa aula:
 - [JSTL e ExpressionLanguage](https://github.com/AlanaZUP/Java-Servlet/tree/master/JSTL%20e%20Expression%20Language)
 - [Redirecionando o Fluxo](https://github.com/AlanaZUP/Java-Servlet/tree/master/Redirecionando%20o%20Fluxo)
 - [Completando o CRUD](https://github.com/AlanaZUP/Java-Servlet/tree/master/Completando%20o%20CRUD)
-- [Deploy da aplicação]()
+- [Deploy da aplicação](https://github.com/AlanaZUP/Java-Servlet/tree/master/Deploy%20da%20aplica%C3%A7%C3%A3o)
