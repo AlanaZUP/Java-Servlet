@@ -22,3 +22,32 @@ Para te ajudar: Qual classe você criaria? De quem ela herdaria? Qual método vo
 - Feito isso irei implementar o Servlet que recebe essa requisição de POST para cadastrar um autor. Esse Servlet será uma classe que extende a classe "HttpServlets" e irá sobrescrever o método "doPost" que recebe requisições do tipo POST, ele possui dois parâmetros referentes ao request e response da requisição. Para informar o endereço da URL referente ao meu Servlet, irei colocar a seguinte tag "@WebServlet("/novoAutor")". Pronto, agora quando o formulário enviar um requisição eu receberei nesse meu Servlet. O request me permitirá acessar os dados enviados pelo formulário, "String paramNome = request.getParameter("nome");" irá guardar o valor digitado pelo usuário no campo "nome" e "String paramEmail = request.getParameter("email");" irá guardar o valor digitado pelo usuário no campo email. Agora eu posso instanciar uma variável Autor que receberá esses dados nome e email -> "Autor autor = new Autor();", "autor.setNome(paramNome);", "autor.setEmail(paramEmail);". Com a minha variável autor criada, eu irei guardar ele no meu Banco simulado, para isso devo instanciar meu banco e adicionar esse meu autor -> "Banco banco = new Banco();", "banco.addAutor(autor);". Com o autor cadastrado, agora eu irei redirecionar para meu Servlet que retorna os autores cadastrado -> "response.sendRedirect("/gerenciador/listaAutores");"
 
 - Como o foco da questão é apenas no POST, não irei abordar a implementação de como listar os autores, mas caso queira verificar, eu implementei essa funcionalidade no repositório do programa [https://github.com/AlanaZUP/Java-Servlet/tree/master/Exerc%C3%ADcio%20proposto](https://github.com/AlanaZUP/Java-Servlet/tree/master/Exerc%C3%ADcio%20proposto); 
+
+<br>
+
+### Solução especialista
+Criar a classe NovoAutorServlet e fazer ela herdar de HttpServlet.
+Motivo da escolha: É necessário herdar dessa classe para obedecer a interface pública esperada pela implementação da especificação de Servlets. Por exemplo o tomcat.
+Criar o método doPost para receber os dados .
+Motivo da escolha: Porque eu quero garantir que essa servlet só aceite requisição do tipo post
+Acessar os valores que vieram nos parâmetros e em função deles criaria o novo objeto autor. É necessário fazer este processo de conversão dos dados que vieram da requisição para os objetos da nossa própria aplicação.
+Criaria o atributo que representa a lista na classe NovoAutorServlet. Eu faria isso porque a instância da Servlet é única e todo valor guardado no atributo declarado nela vive enquanto o servidor estiver de pé.
+Retornaria o status 302 para indicar um redirecionamento para o navegador. Aqui eu me apoio no pattern redirect after post, para prevenir o reenvio do post anterior, que causaria uma adição a mais.
+
+<br>
+
+### Resultado
+Peso 2 -> 1: Criar uma classe que herda de HttpServlet e o motivo
+Não expressei o motivo de ter herdado o HttpServlet. Do meu entendimento ao fazer a classe herda o HttpServlet, a gente indica que essa classe deve atender aos critério de um Servlet e portanto ela é um Servlet.
+
+Peso 4 -> 4: Definir o método que chama service/doPost e o motivo
+Acredito que atendi aos critérios desse item
+
+Peso 2 -> 1: Utilização de um status de redirect e o motivo
+Apesar de usado o redirect e entender o motivo, não expressei que era necessário usar o redirecionamento para o navegador de modo a evitar o reenvio de informações do POST anterior
+
+Peso 1 -> 1: Criação da classe Autor e o motivo
+Acredito que atendi aos critérios desse item
+
+Peso 1 -> 1 : Pegar os valores dos parâmetros através do método getParameter e o motivo (apesar de aqui ser até bem direto)
+Acredito que atendi aos critérios desse item
