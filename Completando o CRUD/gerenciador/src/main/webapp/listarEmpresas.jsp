@@ -8,8 +8,10 @@
 			<c:forEach items="${empresas }" var="empresa">
 			
 				<c:url value="/removeEmpresa?id=${empresa.id}" var="removeEmpresa"></c:url>
+				<c:url value="/mostraEmpresa?id=${empresa.id}" var="mostraEmpresa"></c:url>
 				<li>
 					${empresa.id } - ${empresa.nome}  <fmt:formatDate value="${empresa.dataAbertura }" pattern="dd/MM/yyyy"/> 
+					<a href="${mostraEmpresa }">edita</a>
 					<a href="${removeEmpresa }">Remover</a>
 				</li>
 			</c:forEach>		
