@@ -36,3 +36,13 @@ Esse é o arquivo que armazena configurações relacionadas ao mundo de Servlets
   </servlet-mapping>
 </web-app>
 ```
+
+### Inversão de controle
+
+Retomando ao conteúdo principal do curso, **O que é um Servlet?**. Servlet é um obejto que pode ser acionado por meio de uma requisição do protocolo HTTP. Essa interação é possibilitada pelo Tomcat, e precisa seguir algumas regras, como estender, sobrescrever os métodos `doGet()`, `doPost()` e `service()`, e fazer o mapeamento para indicar a URL.
+
+Repare que em nenhum local do projeto temos o método main(). E quem faz isso é o Tomcat, nosso servlet container. Isso ocorre porque é o Tomcat que receberá a requisição HTTP, e depois deve chamar o método necessário. O Tomcat realiza o papel intermediário entre o navegador e objeto, e por isso também é conhecido como `middleware`.
+
+O Tomcat que criará nosso Servlet de acordo com as requisições, mas ele instancia apenas na primeira requisição, após isso ele reaproveita a que já está criada na memória. Por isso o Servlet é chamado de `Singleton`, um escopo, que sobrevive no projeto por tempo indeterminado enquanto o Tomcat estiver no ar, sem nunca recriá-lo. Isso poderia ser diferente, o Tomcat poderia recriar o servlet a cada requisição, existem outras bibliotecas que fazem isso, que mudam o escopo original do Servlet que antes era Singleton.
+
+Esse processo do Tomcat criar automaticamente a instanciados Servlet é chamado de Inversão de Controle (IOT)
